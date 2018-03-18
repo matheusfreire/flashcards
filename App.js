@@ -33,7 +33,7 @@ const Tabs = TabNavigator({
 		screen: NewDeck,
 		navigationOptions: {
 			tabBarLabel: 'NEW DECKS',
-			tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={black} />
+			tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add-circle' size={30} color={black} />
 		}
 	}
 }, {
@@ -74,12 +74,14 @@ const Navigator = StackNavigator(
 	}
 )
 
+
+
 export default class App extends React.Component {
 	render() {
 		return (
 			<Provider store={createStore(reducer)}>
 				<View style={{ flex: 1 }}>
-					<FlashStatusBar backgroundColor={yellow} barStyle={barStyle = "light-content"} />
+					<FlashStatusBar backgroundColor={black} barStyle={barStyle = "light-content"} />
 					<Navigator />
 				</View>
 			</Provider>

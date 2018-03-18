@@ -2,7 +2,6 @@ import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
 import { TextField } from 'react-native-material-textfield'
 import { StackNavigator, NavigationActions } from 'react-navigation'
-
 import { connect } from 'react-redux'
 import { black, white } from '../utils/colors'
 
@@ -25,8 +24,8 @@ class NewDeck extends React.Component {
     }
     submit = () => {
         const {deck} = this.state
-        this.props.dispatch(addDeck({deck}))
-        addNewDeck({ deck })
+        this.props.dispatch(addDeck(deck))
+        addNewDeck({deck})
         this.listDecks()
     }
 
@@ -97,6 +96,11 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
     },
+    snackbar: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end'
+    }
 })
 function mapStateToProps(state) {
     const {deck} =  state
