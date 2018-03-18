@@ -1,23 +1,88 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
+
+import reducer from './reducers'
+import ListDecks from './components/ListDecks';
+import NewDeck from './components/NewDeck';
+import { yellow, black, white} from './utils/colors';
+
+function FlashStatusBar({ backgroundColor, ...props }) {
+	return(
+		<View style={{backgroundColor: backgroundColor,height: Constants.statusBarHeight}}>
+			<StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+		</View>
+	)
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Tabs = TabNavigator({
+	ListDeck: {
+		screen: ListDecks,
+		navigationOptions: {
+			tabBarLabel: 'DECKS',
+			tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={black} />
+		}
+	},
+	NewDeck: {
+		screen: NewDeck,
+		navigationOptions: {
+			tabBarLabel: 'NEW DECKS',
+			tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={black} />
+		}
+	}
+}, {
+	navigationOptions: {
+		header: null
+	},
+	tabBarOptions: {
+		activeTintColor: black,
+		style: {
+			height: 56,
+			backgroundColor: white,
+			shadowOffset: {
+				width: 0,
+				height: 3
+			},
+			shadowRadius: 6,
+			shadowOpacity: 1
+
+		}
+	}
+}
+)
+
+const Navigator = StackNavigator(
+	{
+		Home: {
+			screen: Tabs
+		},
+		NewDeck: {
+			screen: NewDeck,
+			navigationOptions: {
+				headerTintColor: black,
+				headerStyle: {
+					backgroundColor: white
+				}
+			}
+		}
+	}
+)
+
+export default class App extends React.Component {
+	render() {
+		return (
+			<Provider store={createStore(reducer)}>
+				<View style={{ flex: 1 }}>
+					<FlashStatusBar backgroundColor={yellow} barStyle={barStyle = "light-content"} />
+					<Navigator />
+				</View>
+			</Provider>
+		)
+	}
+} 
