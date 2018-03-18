@@ -11,12 +11,12 @@ import { Constants } from 'expo'
 import reducer from './reducers'
 import ListDecks from './components/ListDecks';
 import NewDeck from './components/NewDeck';
-import { yellow, black, white} from './utils/colors';
+import { yellow, black, white } from './utils/colors';
 
 function FlashStatusBar({ backgroundColor, ...props }) {
-	return(
-		<View style={{backgroundColor: backgroundColor,height: Constants.statusBarHeight}}>
-			<StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+	return (
+		<View style={{ backgroundColor: backgroundColor, height: Constants.statusBarHeight }}>
+			<StatusBar translucent backgroundColor={backgroundColor} {...props} />
 		</View>
 	)
 }
@@ -37,24 +37,35 @@ const Tabs = TabNavigator({
 		}
 	}
 }, {
-	navigationOptions: {
-		header: null
-	},
-	tabBarOptions: {
-		activeTintColor: black,
-		style: {
-			height: 56,
-			backgroundColor: white,
-			shadowOffset: {
-				width: 0,
-				height: 3
-			},
-			shadowRadius: 6,
-			shadowOpacity: 1
+		navigationOptions: {
+			header: null
+		},
+		tabBarOptions: {
+			activeTintColor: black,
+			style: {
+				height: 56,
+				backgroundColor: white,
+				shadowOffset: {
+					width: 0,
+					height: 3
+				},
+				shadowRadius: 6,
+				shadowOpacity: 1
 
+			}
 		}
-	}
-}
+	},
+	{
+		initialRouteName: "Home",
+		swipeEnabled: false,
+		animationEnabled: false,
+		lazy: true,
+		transitionConfig: () => ({
+			transitionSpec: {
+				duration: 0,
+			},
+		}),
+	},
 )
 
 const Navigator = StackNavigator(
@@ -73,6 +84,10 @@ const Navigator = StackNavigator(
 		}
 	}
 )
+
+
+
+
 
 
 
