@@ -1,13 +1,14 @@
-export const FLASHCARD_STORAGE_KEY = 'msf:flashcard'
+import { AsyncStorage } from 'react-native'
 
+export const FLASHCARD_STORAGE_KEY = 'msf:flashcard'
 
 export function fetchDecks() {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
 }
 
-export function addNewDeck({ entry, key }) {
+export function addNewDeck({ title }) {
     return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
-        [key]: entry
+        [title]: title
     }))
 }
 
