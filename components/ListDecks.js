@@ -64,12 +64,6 @@ class ListDecks extends Component {
                             </Text>
 
                             <TouchableOpacity
-                                icon={
-                                    <Ionicons
-                                    name={Platform.OS === 'ios' ? 'ios-happy-outline' : 'md-happy'}
-                                    size={100}
-                                  />
-                                }
                                 style={styles.buttonStyle}
                                 onPress={() => { alert(`${JSON.parse(decks[key]).title} cards`) }} >
                                 <Text style={styles.submitBtnText}>View now</Text>
