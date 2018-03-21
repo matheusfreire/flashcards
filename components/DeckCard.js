@@ -1,17 +1,41 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { gray } from '../utils/colors';
+import {Text, StyleSheet, Platform, TouchableOpacity} from 'react-native';
+import {Card } from 'react-native-elements'
+import { gray, purple, white } from '../utils/colors';
 
-export default function DeckCard({title, quantityCards}){
+export default function DeckCard({ title, questions, showViewButton }) {
 
-    return(
-        <View>
-            <Text style={{fontSize: 20}}>
-                {title}
+    return (
+        <Card style={styles.card} title={title}>
+            <Text style={{ marginBottom: 10, textAlign: 'center' }}>
+                {`${questions.length} cards`}
             </Text>
-            <Text style={{fontSize: 16, color: gray}}>
-                {quantityCards} cards
-            </Text>
-        </View>
+
+            {showViewButton && <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => { alert(`${title} cards`) }} >
+                <Text style={styles.viewBtn}>View now</Text>
+            </TouchableOpacity>}
+            
+        </Card>
     )
 }
+
+const styles = StyleSheet.create({
+    card: {
+        borderRadius: 5
+    },
+    buttonStyle:{
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginRight: 40,
+        backgroundColor: purple
+    },
+    viewBtn: {
+        color: white,
+        fontSize: 18,
+        textAlign: 'center',
+    }
+})

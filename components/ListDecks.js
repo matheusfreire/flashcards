@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
-import { List, ListItem, Card } from 'react-native-elements'
+import { List, Card } from 'react-native-elements'
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -57,23 +57,9 @@ class ListDecks extends Component {
             <View style={styles.container}>
                 <List>
                     {Object.keys(decks).map((key) => (
+                        <DeckCard key={key} style={styles.card} title={JSON.parse(decks[key]).title}
+                            questions={JSON.parse(decks[key]).questions} showViewButton={true} />
 
-                        <Card key={key} style={styles.card} title={JSON.parse(decks[key]).title}>
-                            <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                                {`${JSON.parse(decks[key]).questions.length} cards`}
-                            </Text>
-
-                            <TouchableOpacity
-                                style={styles.buttonStyle}
-                                onPress={() => { alert(`${JSON.parse(decks[key]).title} cards`) }} >
-                                <Text style={styles.submitBtnText}>View now</Text>
-                            </TouchableOpacity>
-                        </Card>
-                        // <ListItem key={key}
-                        //     onPress={() => { alert(`${JSON.parse(decks[key]).title} cards`) }}
-                        //     title={JSON.parse(decks[key]).title}
-                        //     subtitle={`${JSON.parse(decks[key]).questions.length} cards`}
-                        // />
                     ))}
                 </List>
             </View >
@@ -85,22 +71,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: white,
-    },
-    card: {
-        borderRadius: 5
-    },
-    buttonStyle:{
-        padding: 10,
-        borderRadius: 7,
-        height: 45,
-        marginLeft: 40,
-        marginRight: 40,
-        backgroundColor: purple
-    },
-    submitBtnText: {
-        color: white,
-        fontSize: 18,
-        textAlign: 'center',
     }
 })
 
