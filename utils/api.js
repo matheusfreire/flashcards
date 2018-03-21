@@ -9,7 +9,7 @@ export function fetchDecks() {
    
 }
 
-export function addNewDeck({ deck }) {
+export function saveDeckTitle({ deck }) {
     const newObject = JSON.stringify({'title': deck , questions: []})
     return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
         [deck]: newObject

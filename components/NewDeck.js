@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { black, white } from '../utils/colors'
 
 import { addDeck } from '../actions'
-import { addNewDeck } from '../utils/api'
+import { saveDeckTitle } from '../utils/api'
 
 function SubmitBtn({ onPress }) {
     return (
@@ -25,7 +25,7 @@ class NewDeck extends React.Component {
     submit = () => {
         const {deck} = this.state
         this.props.dispatch(addDeck(deck))
-        addNewDeck({deck})
+        saveDeckTitle({deck})
         this.listDecks(deck)
     }
 
