@@ -26,13 +26,12 @@ class NewDeck extends React.Component {
         const {deck} = this.state
         this.props.dispatch(addDeck(deck))
         addNewDeck({deck})
-        this.listDecks()
+        this.listDecks(deck)
     }
 
-    listDecks = () => {
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'NewDeck'
-        }))
+    listDecks = (deck) => {
+        this.props.navigation.navigate('DeckDetail', 
+        { title: deck, quantity: 0}) 
     }
 
     render() {
