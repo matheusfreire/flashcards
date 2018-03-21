@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 
 import { fetchDecks } from '../utils/api'
 import { getDecks } from '../actions'
-import DeckCard from './DeckCard'
 
 import { blue, white, purple } from '../utils/colors'
 
@@ -57,8 +56,18 @@ class ListDecks extends Component {
             <View style={styles.container}>
                 <List>
                     {Object.keys(decks).map((key) => (
-                        <DeckCard key={key} style={styles.card} title={JSON.parse(decks[key]).title}
-                            questions={JSON.parse(decks[key]).questions} showViewButton={true} />
+                        <Card key={key} style={styles.card} title={JSON.parse(decks[key]).title}>
+                            <Text style={{ marginBottom: 10, textAlign: 'center' }}>
+                                {`${JSON.parse(decks[key]).questions.length} cards`}
+                            </Text>
+
+                            <TouchableOpacity
+                                style={styles.buttonStyle}
+                                onPress={() => this.props.navigation.navigate('DeckDetail', { title: JSON.parse(decks[key]).title, quantity: JSON.parse(decks[key]).questions.length })} >
+                                <Text style={styles.viewBtn}>View details</Text>
+                            </TouchableOpacity>
+                        </Card>
+                        
 
                     ))}
                 </List>
@@ -71,6 +80,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: white,
+    },
+    card: {
+        borderRadius: 5
+    },
+    buttonStyle:{
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginRight: 40,
+        backgroundColor: purple
+    },
+    viewBtn: {
+        color: white,
+        fontSize: 18,
+        textAlign: 'center',
     }
 })
 

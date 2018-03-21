@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 
 import { createStore } from 'redux'
@@ -9,9 +9,10 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
 import reducer from './reducers'
-import ListDecks from './components/ListDecks';
-import NewDeck from './components/NewDeck';
-import { yellow, black, white } from './utils/colors';
+import ListDecks from './components/ListDecks'
+import NewDeck from './components/NewDeck'
+import DeckDetail from './components/DeckDetail'
+import { yellow, black, white } from './utils/colors'
 
 function FlashStatusBar({ backgroundColor, ...props }) {
 	return (
@@ -73,12 +74,12 @@ const Navigator = StackNavigator(
 		Home: {
 			screen: Tabs
 		},
-		NewDeck: {
-			screen: NewDeck,
+		DeckDetail: {
+			screen: DeckDetail,
 			navigationOptions: {
-				headerTintColor: black,
+				headerTintColor: white,
 				headerStyle: {
-					backgroundColor: white
+					backgroundColor: black
 				}
 			}
 		}
