@@ -63,7 +63,7 @@ class ListDecks extends Component {
 
                             <TouchableOpacity
                                 style={styles.buttonStyle}
-                                onPress={() => this.props.navigation.navigate('DeckDetail', { title: JSON.parse(decks[key]).title, quantity: JSON.parse(decks[key]).questions.length })} >
+                                onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
                                 <Text style={styles.viewBtn}>View details</Text>
                             </TouchableOpacity>
                         </Card>

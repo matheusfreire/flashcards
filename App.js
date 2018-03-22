@@ -13,6 +13,7 @@ import ListDecks from './components/ListDecks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
 import { yellow, black, white } from './utils/colors'
+import NewCard from './components/NewCard';
 
 function FlashStatusBar({ backgroundColor, ...props }) {
 	return (
@@ -76,6 +77,15 @@ const Navigator = StackNavigator(
 		},
 		DeckDetail: {
 			screen: DeckDetail,
+			navigationOptions: {
+				headerTintColor: white,
+				headerStyle: {
+					backgroundColor: black
+				}
+			}
+		},
+		NewCard: {
+			screen: NewCard,
 			navigationOptions: {
 				headerTintColor: white,
 				headerStyle: {

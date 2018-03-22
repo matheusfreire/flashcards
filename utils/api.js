@@ -16,6 +16,16 @@ export function saveDeckTitle({ deck }) {
     }))
 }
 
+export function addCardToDeck({title, card}){
+    return fetchDecks().then(results => {
+        deck = results[title]
+        deck.questions.push(card)
+        return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+            [key]: title
+        }))
+    })
+}
+
 export function removeDeck(key) {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
         .then((results) => {

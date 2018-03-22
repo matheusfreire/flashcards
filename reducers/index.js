@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_NEW_DECK } from "../utils/ActionType";
+import { GET_DECKS, ADD_NEW_DECK, ADD_NEW_CARD } from "../utils/ActionType";
 
 
 function decks(state = {}, action) {
@@ -12,6 +12,12 @@ function decks(state = {}, action) {
             return {
                 ...state,
                 ...action.deck
+            }
+        case ADD_NEW_CARD:
+            let newState = {...state}
+            newState[action.deck].questions.push(action.card)
+            return {
+                ...state, ...action.deck
             }
         default:
             return state

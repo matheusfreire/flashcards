@@ -1,18 +1,25 @@
-import React, {Component} from 'react';
-import {View,Text, StyleSheet, Platform, TouchableOpacity} from 'react-native';
-import {Card } from 'react-native-elements'
-import { gray, purple, white, black } from '../utils/colors';
+import React, {Component} from 'react'
 
-export default class DeckDetail extends Component {
+import {View,Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
+import {Card } from 'react-native-elements'
+
+import { connect } from 'react-redux'
+
+import { gray, purple, white, black } from '../utils/colors'
+
+class DeckDetail extends Component {
 
     static navigationOptions = ({ navigation }) => {
-        const { title } = navigation.state.params
+        const { deck } = navigation.state.params
         return {
-            title: `${title}`
+            title: `${deck}`
         }
     }
     render(){
-        const {title, quantity } = this.props.navigation.state.params
+        const {navigation, decks} = this.props
+        const key = navigation.state.params.deck
+        const deck = JSON.parse(decks[key])
+        const {title, questions } = deck
         return (
             <View style={styles.container}>
 
@@ -21,14 +28,14 @@ export default class DeckDetail extends Component {
                         {title}
                     </Text>
                     <Text style={styles.card}>
-                        {`${quantity} cards`}
+                        {`${questions.length} cards`}
                     </Text>
                 </View>
     
                 <View style={[styles.views, {alignItems: 'center'}]}>
                     <TouchableOpacity
                         style={[styles.btn, {backgroundColor: white,borderColor: 'black', borderWidth: 2}]}
-                        onPress={() => { alert(`${title} cards`) }} >
+                        onPress={() => this.props.navigation.navigate('NewCard', { deck: key })} >
                         <Text style={[styles.textBtn, {color: black}]}>Add Card</Text>
                     </TouchableOpacity>
         
@@ -85,3 +92,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     }
 })
+function mapStateToProps(state) {
+    return {
+        decks: state
+    }
+}
+
+export default connect(mapStateToProps)(DeckDetail)
