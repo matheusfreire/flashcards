@@ -18,7 +18,7 @@ class DeckDetail extends Component {
     render(){
         const {navigation, decks} = this.props
         const key = navigation.state.params.deck
-        const deck = JSON.parse(decks[key])
+        const deck = decks[key]
         const {title, questions } = deck
 
         return (

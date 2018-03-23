@@ -24,12 +24,18 @@ class NewDeck extends React.Component {
     }
     submit = () => {
         const {deck} = this.state
-        saveDeckTitle({deck}).then(this.props.dispatch(addDeck(deck)))
-        this.listDecks(deck)
+        const obj = {title: deck, questions: []}
+        saveDeckTitle({deck}).then(() => {
+            this.props.dispatch(addDeck(obj, deck))
+            this.setState({deck: ''})
+            this.props.navigation.navigate('DeckDetail', {deck: deck})
+        })
+        // this.listDecks(deck)
     }
 
     listDecks = (deck) => {
-        this.props.navigation.goBack()
+        // this.props.navigation.goBack()
+        this.props.navigation.navigate('DeckDetail', { deck: deck })
     }
 
     render() {

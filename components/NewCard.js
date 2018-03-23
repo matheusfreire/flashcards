@@ -30,7 +30,7 @@ class NewCard extends React.Component {
         const {navigation, dispatch} = this.props
         const deck = navigation.state.params.deck
         const card = {question: this.state.question, answer: this.state.answer}
-        addCardToDeck({deck, card}).then(dispatch(addCard(deck, card)))
+        addCardToDeck(deck, card).then(dispatch(addCard(deck, card)))
         this.goToDeck()
     }
 

@@ -8,10 +8,11 @@ export function getDecks(decks) {
   }
 }
 
-export function addDeck(newDeck) {
+export function addDeck(newDeck, title) {
   return {
     type: ADD_NEW_DECK,
     newDeck,
+    title
   }
 }
 

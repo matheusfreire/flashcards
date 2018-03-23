@@ -52,13 +52,14 @@ class ListDecks extends Component {
                 </View>
             )
         }
+        console.log(decks)
         return (
             <ScrollView style={styles.container}>
                 <List>
                     {Object.keys(decks).map((key) => (
-                        <Card key={key} style={styles.card} title={JSON.parse(decks[key]).title}>
+                        <Card key={key} style={styles.card} title={decks[key].title}>
                             <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                                {`${JSON.parse(decks[key]).questions.length} cards`}
+                                {`${decks[key].questions.length} cards`}
                             </Text>
 
                             <TouchableOpacity
