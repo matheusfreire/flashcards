@@ -20,6 +20,7 @@ class DeckDetail extends Component {
         const key = navigation.state.params.deck
         const deck = JSON.parse(decks[key])
         const {title, questions } = deck
+
         return (
             <View style={styles.container}>
 

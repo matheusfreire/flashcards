@@ -24,14 +24,12 @@ class NewDeck extends React.Component {
     }
     submit = () => {
         const {deck} = this.state
-        this.props.dispatch(addDeck(deck))
-        saveDeckTitle({deck})
+        saveDeckTitle({deck}).then(this.props.dispatch(addDeck(deck)))
         this.listDecks(deck)
     }
 
     listDecks = (deck) => {
-        this.props.navigation.navigate('DeckDetail', 
-        { title: deck, quantity: 0}) 
+        this.props.navigation.goBack()
     }
 
     render() {
@@ -102,9 +100,9 @@ const styles = StyleSheet.create({
     }
 })
 function mapStateToProps(state) {
-    const {deck} =  state
+    const {decks} =  state
     return {
-        deck
+        decks
     }
 }
 

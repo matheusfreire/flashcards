@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity,ScrollView } from 'react-native'
 import { List, Card } from 'react-native-elements'
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
@@ -53,7 +53,7 @@ class ListDecks extends Component {
             )
         }
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <List>
                     {Object.keys(decks).map((key) => (
                         <Card key={key} style={styles.card} title={JSON.parse(decks[key]).title}>
@@ -67,11 +67,9 @@ class ListDecks extends Component {
                                 <Text style={styles.viewBtn}>View details</Text>
                             </TouchableOpacity>
                         </Card>
-                        
-
                     ))}
                 </List>
-            </View >
+            </ScrollView>
         )
     }
 }
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
     card: {
         borderRadius: 5
     },
-    buttonStyle:{
+    buttonStyle: {
         padding: 10,
         borderRadius: 7,
         height: 45,

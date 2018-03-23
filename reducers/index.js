@@ -2,6 +2,7 @@ import { GET_DECKS, ADD_NEW_DECK, ADD_NEW_CARD } from "../utils/ActionType";
 
 
 function decks(state = {}, action) {
+    var newState = {}
     switch (action.type) {
         case GET_DECKS:
             return {
@@ -14,8 +15,8 @@ function decks(state = {}, action) {
                 ...action.deck
             }
         case ADD_NEW_CARD:
-            let newState = {...state}
-            newState[action.deck].questions.push(action.card)
+            newState = {...state}
+            newState[action.deck].questions.concat(action.card)
             return {
                 ...state, ...action.deck
             }

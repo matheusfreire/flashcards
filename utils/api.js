@@ -20,8 +20,8 @@ export function addCardToDeck({title, card}){
     return fetchDecks().then(results => {
         deck = results[title]
         deck.questions.push(card)
-        return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-            [key]: title
+        return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
+            [key]: deck
         }))
     })
 }
