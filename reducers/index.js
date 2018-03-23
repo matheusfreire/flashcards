@@ -15,11 +15,9 @@ function decks(state = {}, action) {
                 [action.title]:action.newDeck
             }
         case ADD_NEW_CARD:
-            newState = {...state}
+            newState = { ...state }
             newState[action.deck].questions.push(action.card)
-            return {
-                ...state, ...action.deck
-            }
+            return newState
         default:
             return state
     }

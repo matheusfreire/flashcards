@@ -52,7 +52,6 @@ class ListDecks extends Component {
                 </View>
             )
         }
-        console.log(decks)
         return (
             <ScrollView style={styles.container}>
                 <List>
