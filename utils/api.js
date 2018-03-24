@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-const FLASHCARD_STORAGE_KEY = 's2'
+const FLASHCARD_STORAGE_KEY = 'flashcard:storage'
 
 export function fetchDecks() {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY).then(result => {

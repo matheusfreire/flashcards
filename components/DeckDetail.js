@@ -42,7 +42,7 @@ class DeckDetail extends Component {
         
                     <TouchableOpacity
                         style={[styles.btn, {backgroundColor: black }]}
-                        onPress={() => { alert(`${title} cards`) }} >
+                        onPress={() => navigation.navigate('Quiz', { key })} >
                         <Text style={[styles.textBtn, {color: white}]}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
         width: 150,
         marginLeft: 40,
         marginRight: 40,
+        marginTop: 10,
         
     },
     textBtn: {

@@ -2,18 +2,21 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 
+import reducer from './reducers'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
-import reducer from './reducers'
 import ListDecks from './components/ListDecks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
+import NewCard from './components/NewCard'
+import Quiz from './components/Quiz'
+
 import { yellow, black, white } from './utils/colors'
-import NewCard from './components/NewCard';
+import { setLocalNotification } from './utils/helpers'
 
 function FlashStatusBar({ backgroundColor, ...props }) {
 	return (
@@ -92,17 +95,23 @@ const Navigator = StackNavigator(
 					backgroundColor: black
 				}
 			}
+		},
+		Quiz: {
+			screen: Quiz,
+			navigationOptions: {
+				headerTintColor: white,
+				headerStyle: {
+					backgroundColor: black
+				}
+			}
 		}
 	}
 )
 
-
-
-
-
-
-
 export default class App extends React.Component {
+	componentDidMount(){
+		setLocalNotification()
+	}
 	render() {
 		return (
 			<Provider store={createStore(reducer)}>

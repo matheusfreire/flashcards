@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity,ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity, ScrollView } from 'react-native'
 import { List, Card } from 'react-native-elements'
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
 import { AppLoading } from 'expo'
 import { connect } from 'react-redux'
+
+import EmptyDeck from '../components/EmptyDeck'
 
 import { fetchDecks } from '../utils/api'
 import { getDecks } from '../actions'
@@ -54,21 +56,25 @@ class ListDecks extends Component {
         }
         return (
             <ScrollView style={styles.container}>
-                <List>
-                    {Object.keys(decks).map((key) => (
-                        <Card key={key} style={styles.card} title={decks[key].title}>
-                            <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                                {`${decks[key].questions.length} cards`}
-                            </Text>
+                {decks !== null && decks.length > 0 
+                    ?<List>
+                        {Object.keys(decks).map((key) => (
+                            <Card key={key} style={styles.card} title={decks[key].title}>
+                                <Text style={{ marginBottom: 10, textAlign: 'center' }}>
+                                    {`${decks[key].questions.length} cards`}
+                                </Text>
 
-                            <TouchableOpacity
-                                style={styles.buttonStyle}
-                                onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
-                                <Text style={styles.viewBtn}>View details</Text>
-                            </TouchableOpacity>
-                        </Card>
-                    ))}
-                </List>
+                                <TouchableOpacity
+                                    style={styles.buttonStyle}
+                                    onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
+                                    <Text style={styles.viewBtn}>View details</Text>
+                                </TouchableOpacity>
+                            </Card>
+                        ))}
+                    </List>
+                    :<EmptyDeck />
+                }
+
             </ScrollView>
         )
     }
