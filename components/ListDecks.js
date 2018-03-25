@@ -56,20 +56,16 @@ class ListDecks extends Component {
         }
         return (
             <ScrollView style={styles.container}>
-                {decks !== null && decks.length > 0 
+                {decks 
                     ?<List>
                         {Object.keys(decks).map((key) => (
-                            <Card key={key} style={styles.card} title={decks[key].title}>
-                                <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                                    {`${decks[key].questions.length} cards`}
-                                </Text>
-
-                                <TouchableOpacity
-                                    style={styles.buttonStyle}
-                                    onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
-                                    <Text style={styles.viewBtn}>View details</Text>
-                                </TouchableOpacity>
-                            </Card>
+                            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
+                                <Card  style={styles.card} title={decks[key].title}>
+                                    <Text style={{ marginBottom: 10, textAlign: 'center' }}>
+                                        {`${decks[key].questions.length} cards`}
+                                    </Text>
+                                </Card>
+                            </TouchableOpacity>
                         ))}
                     </List>
                     :<EmptyDeck />
@@ -87,19 +83,6 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 5
-    },
-    buttonStyle: {
-        padding: 10,
-        borderRadius: 7,
-        height: 45,
-        marginLeft: 40,
-        marginRight: 40,
-        backgroundColor: purple
-    },
-    viewBtn: {
-        color: white,
-        fontSize: 18,
-        textAlign: 'center',
     }
 })
 
