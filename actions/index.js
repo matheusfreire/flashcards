@@ -4,7 +4,7 @@ import { GET_DECKS, ADD_NEW_DECK, ADD_NEW_CARD, REMOVE_DECK } from "../utils/Act
 export function getDecks(decks) {
   return {
     type: GET_DECKS,
-    decks,
+    decks
   }
 }
 
