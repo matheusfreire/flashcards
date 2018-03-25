@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deck List renders without crashing 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "padding": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "borderColor": "black",
+        "borderRadius": 55,
+        "borderWidth": 1,
+        "marginBottom": 10,
+        "marginTop": 10,
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Question"
+      style={undefined}
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "borderColor": "black",
+        "borderRadius": 55,
+        "borderWidth": 1,
+        "marginBottom": 10,
+        "marginTop": 10,
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Answer"
+      style={undefined}
+      value=""
+    />
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#000000",
+        "borderRadius": 7,
+        "height": 45,
+        "marginLeft": 40,
+        "marginRight": 40,
+        "opacity": 1,
+        "padding": 10,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#fff",
+          "fontSize": 22,
+          "textAlign": "center",
+        }
+      }
+    >
+      Submit
+    </Text>
+  </View>
+</View>
+`;
