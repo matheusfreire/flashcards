@@ -9,8 +9,8 @@ import { connect } from 'react-redux'
 
 import EmptyDeck from '../components/EmptyDeck'
 
-import { fetchDecks } from '../utils/api'
-import { getDecks } from '../actions'
+import { fetchDecks, removeDeck } from '../utils/api'
+import { getDecks, excludeDeck } from '../actions'
 
 import { blue, white, purple } from '../utils/colors'
 
@@ -21,6 +21,10 @@ class ListDecks extends Component {
     }
 
     componentDidMount() {
+        this.obtainDecks()
+    }
+
+    obtainDecks() {
         fetchDecks()
             .then((decks) => {
                 this.props.dispatch(getDecks(decks))
@@ -38,8 +42,14 @@ class ListDecks extends Component {
     }
 
 
-    renderItem(item) {
-        return <DeckCard title={item.title} quantityCards={item.questions.length} />
+    deleteDeck(deck) {
+        this.setState({ loading: true })
+        removeDeck(deck).then(() => {
+            this.props.dispatch(excludeDeck(deck))
+        })
+        .then(() => {
+            this.setState({loading: false})
+        })
     }
 
     render() {
@@ -56,11 +66,15 @@ class ListDecks extends Component {
         }
         return (
             <ScrollView style={styles.container}>
-                {decks 
-                    ?<List>
+                {decks
+                    ? <List>
                         {Object.keys(decks).map((key) => (
-                            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })} >
-                                <Card  style={styles.card} title={decks[key].title}>
+                            <TouchableOpacity key={key}
+                                onPress={() => this.props.navigation.navigate('DeckDetail', { deck: key })}
+                                onLongPress={() => {
+                                    this.deleteDeck(key)
+                                }}>
+                                <Card style={styles.card} title={decks[key].title}>
                                     <Text style={{ marginBottom: 10, textAlign: 'center' }}>
                                         {`${decks[key].questions.length} cards`}
                                     </Text>
@@ -68,7 +82,7 @@ class ListDecks extends Component {
                             </TouchableOpacity>
                         ))}
                     </List>
-                    :<EmptyDeck />
+                    : <EmptyDeck />
                 }
 
             </ScrollView>
