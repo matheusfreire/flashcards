@@ -17,7 +17,7 @@ In Card Quiz:
 ## Run
 
 * `git clone https://github.com/matheusfreire/flashcards.git` 
-* `cd mobile-flashcards/`
+* `cd flashcard/`
 * `yarn install` or `npm install`
 * `yarn start` or `npm start`
 
