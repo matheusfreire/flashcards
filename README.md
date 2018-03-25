@@ -6,7 +6,7 @@ The application was tested on iPhone X and Nexus 6P.
 
 ## App Usage
 
-In Deck Main or Deck Detail:
+In Deck`s list:
 
 * Click for enter in detail of deck or long press to delete the deck.
 
@@ -19,7 +19,6 @@ In Card Quiz:
 * `git clone https://github.com/matheusfreire/flashcards.git` 
 * `cd mobile-flashcards/`
 * `yarn install` or `npm install`
-Then
 * `yarn start` or `npm start`
 
 ## View on Mobile Phone
