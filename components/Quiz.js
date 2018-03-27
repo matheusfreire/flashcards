@@ -32,9 +32,9 @@ class Quiz extends Component {
 
     submitAnswer = (correct) => {
         if (correct) {
-            this.setState({ corrects: (this.state.numAnswersCorrect + 1) })
+            this.setState({ numAnswersCorrect: (this.state.numAnswersCorrect + 1) })
         } else {
-            this.setState({ incorrects: (this.state.numAnswersIncorrect + 1) })
+            this.setState({ numAnswersIncorrect: (this.state.numAnswersIncorrect + 1) })
         }
         this.setState({ index: (this.state.index + 1), showAnswer: false })
 
