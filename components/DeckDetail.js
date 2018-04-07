@@ -29,7 +29,7 @@ class DeckDetail extends Component {
                         {title}
                     </Text>
                     <Text style={styles.card}>
-                        {`${questions.length} cards`}
+                        {`${questions.length} card${questions.length > 1 ? "s" :"" }`}
                     </Text>
                 </View>
     
@@ -42,7 +42,7 @@ class DeckDetail extends Component {
         
                     <TouchableOpacity
                         style={[styles.btn, {backgroundColor: black }]}
-                        onPress={() => navigation.navigate('Quiz', { key })} >
+                        onPress={() => navigation.navigate('Quiz', { deck: key })} >
                         <Text style={[styles.textBtn, {color: white}]}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>

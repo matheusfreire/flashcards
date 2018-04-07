@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 
@@ -13,7 +13,7 @@ import ListDecks from './components/ListDecks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
 import NewCard from './components/NewCard'
-import Quiz from './components/Quiz'
+import QuizScreen from './components/QuizScreen'
 
 import { yellow, black, white } from './utils/colors'
 import { setLocalNotification } from './utils/helpers'
@@ -96,8 +96,8 @@ const Navigator = StackNavigator(
 				}
 			}
 		},
-		Quiz: {
-			screen: Quiz,
+		QuizScreen: {
+			screen: QuizScreen,
 			navigationOptions: {
 				headerTintColor: white,
 				headerStyle: {

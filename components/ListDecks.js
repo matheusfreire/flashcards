@@ -76,7 +76,7 @@ class ListDecks extends Component {
                                 }}>
                                 <Card style={styles.card} title={decks[key].title}>
                                     <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                                        {`${decks[key].questions.length} cards`}
+                                        {`${decks[key].questions.length} card${decks[key].questions.length > 1 ? "s": ""}`}
                                     </Text>
                                 </Card>
                             </TouchableOpacity>
