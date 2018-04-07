@@ -13,11 +13,11 @@ class QuizScreen extends Component {
 	}
 
 	static navigationOptions = ({ navigation }) => ({
-		header: 'Quiz',
+		title: 'Quiz',
 	})
 
 
-	setVisibilityOfAnswer = () => {
+	flipCard = () => {
 		this.setState({ isAnswerVisible: !this.state.isAnswerVisible })
 	}
 
@@ -46,47 +46,47 @@ class QuizScreen extends Component {
 
 	render() {
 		const { navigation, decks } = this.props
-		const deck = decks[navigation.state.params.key]
-		const quantityOfCards = decks.questions.length
+		const deck = decks[navigation.state.params.deck]
+		const quantityOfCards = deck.questions.length
+		const { indexCard } = this.state
 		return (
 			<View style={styles.container}>
-				<Text styles={resumeNumQuestions}>
-					{this.state.indexCard}/{quantityOfCards}
+				<Text style={styles.resumeNumQuestions}>
+					{indexCard + 1}/{quantityOfCards}
 				</Text>
-				<Text style={styles.header}>
-					Quiz - {deck.header}
-				</Text>
-
-				{this.state.indexCard < quantityOfCards
-					? this.renderQuiz(deck, index)
+				{indexCard < quantityOfCards
+					? this.showResume(quantityOfCards)
 					: this.showResume(quantityOfCards)
 				}
-			</View>
+				
+			</View >
 		)
 	}
 
-	showResume = (quantityCards) => {
-		<View>
-			<Text style={styles.subheader}>
-				Resume of Quiz
-			</Text>
-			<Text style={[styles.subheader,{ backgroundColor: black }]}>
-				Correct: {this.state.numAnswersCorrect/quantityCards}
-			</Text>
-			<View style={[styles.views, { alignItems: 'center' }]}>
-				<TouchableOpacity
-					style={[styles.btn, { backgroundColor: black }]}
-					onPress={() => { this.reset() }}>
-					<Text style={[styles.textBtn, { color: white }]}>Reset</Text>
-				</TouchableOpacity>
+	showResume = (quantityOfCards) => {
+		return(
+			<View style={styles.container}>
+				<View style={styles.views}>
+                    <Text style={styles.header}>
+					Resume of Quiz
+                    </Text>
+                    <Text style={styles.card}>
+					Correct: {Math.floor(this.state.numAnswersCorrect / quantityOfCards) * 100}
+                    </Text>
+                </View>
+				<View style={[styles.views, { alignItems: 'center' }]}>
+					<TouchableOpacity style={[styles.btn, { backgroundColor: black }]}
+						onPress={() => { this.reset() }}>
+						<Text style={[styles.textBtn, { color: white }]}>Reset</Text>
+					</TouchableOpacity>
 
-				<TouchableOpacity
-					style={[styles.btn, { backgroundColor: red }]}
-					onPress={() => this.props.navigation.goBack()}>
-					<Text style={[styles.textBtn, { color: white }]}>Back to Deck</Text>
-				</TouchableOpacity>
+					<TouchableOpacity style={[styles.btn, { backgroundColor: red }]}
+						onPress={() => this.props.navigation.goBack()}>
+						<Text style={[styles.textBtn, { color: white }]}>Back to Deck</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
-		</View>
+		)
 	}
 }
 
@@ -107,20 +107,19 @@ const styles = StyleSheet.create({
 		height: 50,
 	},
 	header: {
-		marginBottom: 10,
-		textAlign: 'center',
-		fontSize: 30,
-		color: black
-	},
+        marginBottom: 10, 
+        textAlign: 'center',
+        fontSize: 40,
+    },
 	subHeader: {
-		marginBottom: 10,
+		margin: 20,
 		textAlign: 'center',
 		fontSize: 25,
 	},
 	resumeNumQuestions: {
 		marginBottom: 10,
 		textAlign: 'left',
-		fontSize: 12,
+		fontSize: 16,
 		color: gray
 	},
 	card: {
