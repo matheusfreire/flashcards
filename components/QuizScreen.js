@@ -1,36 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import { white, red, green, black, gray } from '../utils/colors'
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
+import { Card } from 'react-native-elements'
+import FlipComponent from 'react-native-flip-component'
 
 class QuizScreen extends Component {
 	state = {
 		indexCard: 0,
-		isAnswerVisible: false,
 		numAnswersCorrect: 0,
 		numAnswersIncorrect: 0,
+		isFlipped: false
 	}
 
 	static navigationOptions = ({ navigation }) => ({
 		title: 'Quiz',
 	})
 
-
-	flipCard = () => {
-		this.setState({ isAnswerVisible: !this.state.isAnswerVisible })
-	}
-
 	submitAnswer = (correct) => {
 		if (correct) {
-			this.setState({ numAnswersCorrect: ++this.state.numAnswersCorrect })
+			this.setState({ numAnswersCorrect: this.state.numAnswersCorrect + 1 })
 		} else {
-			this.setState({ numAnswersIncorrect: ++this.state.numAnswersIncorrect + 1 })
+			this.setState({ numAnswersIncorrect: this.state.numAnswersIncorrect + 1 })
 		}
-		this.setState({ indexCard: ++this.state.indexCard, isAnswerVisible: false })
-
+		let newIndex = this.state.indexCard + 1
+		this.setState({ indexCard: newIndex, isFlipped: false })
 		const deck = this.props.decks[this.props.navigation.state.params.deck]
-		if (this.state.indexCard >= deck.questions.length) {
+		if (newIndex >= deck.questions.length) {
 			clearLocalNotification().then(setLocalNotification())
 		}
 	}
@@ -38,11 +35,11 @@ class QuizScreen extends Component {
 	reset = () => {
 		this.setState({
 			indexCard: 0,
-			isAnswerVisible: false,
 			numAnswersCorrect: 0,
 			numAnswersIncorrect: 0
 		})
 	}
+
 
 	render() {
 		const { navigation, decks } = this.props
@@ -51,29 +48,94 @@ class QuizScreen extends Component {
 		const { indexCard } = this.state
 		return (
 			<View style={styles.container}>
-				<Text style={styles.resumeNumQuestions}>
-					{indexCard + 1}/{quantityOfCards}
-				</Text>
 				{indexCard < quantityOfCards
-					? this.showResume(quantityOfCards)
+					? this.showCard(deck, indexCard, quantityOfCards)
 					: this.showResume(quantityOfCards)
 				}
-				
 			</View >
 		)
 	}
 
+	showCard = (deck, index, quantityOfCards) => {
+		const question = deck.questions[index]
+		return (
+			<View>
+				<Text style={styles.resumeNumQuestions}>
+					{this.state.indexCard + 1}/{quantityOfCards}
+				</Text>
+				
+				<FlipComponent
+					containerStyles={{alignItems: 'center'}}
+					isFlipped={this.state.isFlipped}
+					frontView={
+						this.showQuestion(question.question)
+					}
+					backView={
+						this.showAnswer(question.answer)
+					}
+				/>
+				<Button onPress={() => {this.setState({ isFlipped: !this.state.isFlipped })}}
+					title={!this.state.isFlipped ? "Show answer":"Show question"}/>
+			</View>
+		)
+	}
+
+	showQuestion = (question) => {
+		return (
+			<View>
+				<Card style={styles.viewCard} title={question}>
+					<Text style={{ marginBottom: 10, textAlign: 'center' }}>
+						Click below to view the answer
+					</Text>
+				</Card>
+				{this.showButtons(false)}
+			</View>
+		)
+	}
+
+	showButtons = (enable) => {
+		return (
+			<View style={{ alignItems: 'center' }}>
+				<TouchableOpacity
+					style={[styles.btn, { backgroundColor: enable ? green : gray }]}
+					onPress={() => this.submitAnswer(true)}
+					disabled={!enable} >
+					<Text style={[styles.textBtn, { color: white }]}>Correct</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					style={[styles.btn, { backgroundColor: enable ? red : gray }]}
+					onPress={() => this.submitAnswer(false)}
+					disabled={!enable} >
+					<Text style={[styles.textBtn, { color: white }]}>Incorrect</Text>
+				</TouchableOpacity>
+			</View>
+		)
+	}
+	showAnswer = (answer) => {
+		return (
+			<View>
+				<Card style={styles.viewCard} title={answer}>
+					<Text style={{ marginBottom: 10, textAlign: 'center' }}>
+						Click in buttons below to answer that
+					</Text>
+				</Card>
+				{this.showButtons(true)}
+			</View>
+		)
+	}
+
 	showResume = (quantityOfCards) => {
-		return(
+		return (
 			<View style={styles.container}>
 				<View style={styles.views}>
-                    <Text style={styles.header}>
-					Resume of Quiz
+					<Text style={styles.header}>
+						Resume of Quiz
                     </Text>
-                    <Text style={styles.card}>
-					Correct: {Math.floor(this.state.numAnswersCorrect / quantityOfCards) * 100}
-                    </Text>
-                </View>
+					<Text style={styles.subHeader}>
+						Correct: {(this.state.numAnswersCorrect / quantityOfCards) * 100}%
+					</Text>
+				</View>
 				<View style={[styles.views, { alignItems: 'center' }]}>
 					<TouchableOpacity style={[styles.btn, { backgroundColor: black }]}
 						onPress={() => { this.reset() }}>
@@ -101,31 +163,29 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		height: 50,
 	},
+	viewCard: {
+		borderRadius: 5
+	},
 	viewBtn: {
 		flex: 1,
 		alignItems: 'flex-end',
 		height: 50,
 	},
 	header: {
-        marginBottom: 10, 
-        textAlign: 'center',
-        fontSize: 40,
-    },
+		marginBottom: 10,
+		textAlign: 'center',
+		fontSize: 40,
+	},
 	subHeader: {
 		margin: 20,
 		textAlign: 'center',
-		fontSize: 25,
+		fontSize: 19,
+		color: gray
 	},
 	resumeNumQuestions: {
 		marginBottom: 10,
 		textAlign: 'left',
 		fontSize: 16,
-		color: gray
-	},
-	card: {
-		marginBottom: 10,
-		textAlign: 'center',
-		fontSize: 20,
 		color: gray
 	},
 	btn: {
