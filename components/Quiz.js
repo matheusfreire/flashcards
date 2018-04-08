@@ -6,7 +6,7 @@ import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 import { Card } from 'react-native-elements'
 import FlipComponent from 'react-native-flip-component'
 
-class QuizScreen extends Component {
+class Quiz extends Component {
 	state = {
 		indexCard: 0,
 		numAnswersCorrect: 0,
@@ -211,4 +211,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(QuizScreen)
+export default connect(mapStateToProps)(Quiz)

@@ -13,7 +13,7 @@ import ListDecks from './components/ListDecks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
 import NewCard from './components/NewCard'
-import QuizScreen from './components/QuizScreen'
+import Quiz from './components/Quiz'
 
 import { yellow, black, white } from './utils/colors'
 import { setLocalNotification } from './utils/helpers'
@@ -96,8 +96,8 @@ const Navigator = StackNavigator(
 				}
 			}
 		},
-		QuizScreen: {
-			screen: QuizScreen,
+		Quiz: {
+			screen: Quiz,
 			navigationOptions: {
 				headerTintColor: white,
 				headerStyle: {

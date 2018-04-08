@@ -42,7 +42,7 @@ class DeckDetail extends Component {
         
                     <TouchableOpacity
                         style={[styles.btn, {backgroundColor: black }]}
-                        onPress={() => navigation.navigate('QuizScreen', { deck: key })} >
+                        onPress={() => navigation.navigate('Quiz', { deck: key })} >
                         <Text style={[styles.textBtn, {color: white}]}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
