@@ -36,7 +36,8 @@ class Quiz extends Component {
 		this.setState({
 			indexCard: 0,
 			numAnswersCorrect: 0,
-			numAnswersIncorrect: 0
+			numAnswersIncorrect: 0,
+			isFlipped: false
 		})
 	}
 
@@ -165,11 +166,6 @@ const styles = StyleSheet.create({
 	},
 	viewCard: {
 		borderRadius: 5
-	},
-	viewBtn: {
-		flex: 1,
-		alignItems: 'flex-end',
-		height: 50,
 	},
 	header: {
 		marginBottom: 10,
