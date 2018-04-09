@@ -24,6 +24,10 @@ class NewDeck extends React.Component {
     }
     submit = () => {
         const {deck} = this.state
+        if(!deck || (deck !== null && deck.trim().length === 0)){
+            alert("Please, provide a title for your new deck")
+            return;
+        }
         const obj = {title: deck, questions: []}
         saveDeckTitle({deck}).then(() => {
             this.props.dispatch(addDeck(obj, deck))

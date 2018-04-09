@@ -15,6 +15,15 @@ class DeckDetail extends Component {
             title: `${deck}`
         }
     }
+
+    startQuiz(key, questions){
+        if(questions.length > 0){
+            this.props.navigation.navigate('Quiz', { deck: key })
+        } else {
+            alert("Please, insert at least one card for start a new quiz")
+        }
+    }
+
     render(){
         const {navigation, decks} = this.props
         const key = navigation.state.params.deck
@@ -42,7 +51,7 @@ class DeckDetail extends Component {
         
                     <TouchableOpacity
                         style={[styles.btn, {backgroundColor: black }]}
-                        onPress={() => navigation.navigate('Quiz', { deck: key })} >
+                        onPress={() => {this.startQuiz(key, questions)}} >
                         <Text style={[styles.textBtn, {color: white}]}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
