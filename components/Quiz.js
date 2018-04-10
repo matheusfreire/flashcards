@@ -134,7 +134,7 @@ class Quiz extends Component {
 						Resume of Quiz
                     </Text>
 					<Text style={styles.subHeader}>
-						{((this.state.numAnswersCorrect / quantityOfCards) * 100).toFixed(2)}%
+						Correct: {((this.state.numAnswersCorrect / quantityOfCards) * 100).toFixed(2)}%
 					</Text>
 				</View>
 				<View style={[styles.views, { alignItems: 'center' }]}>
