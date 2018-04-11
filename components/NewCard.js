@@ -28,17 +28,24 @@ class NewCard extends React.Component {
     submit = () => {
         Keyboard.dismiss()
         const {navigation, dispatch} = this.props
-        const deck = navigation.state.params.deck
-        const card = {question: this.state.question, answer: this.state.answer}
-        addCardToDeck(deck, card).then(() => {
-            dispatch(addCard(deck, card))
-            navigation.goBack()
-        })
-        // this.goToDeck()
+        const {question, answer} = this.state
+        if(this.validate(question, "Please, insert a question for your new card") && this.validate(answer, "Please, insert an answer for this card")){
+            const deck = navigation.state.params.deck
+            const card = {question: this.state.question, answer: this.state.answer}
+            addCardToDeck(deck, card).then(() => {
+                dispatch(addCard(deck, card))
+                navigation.goBack()
+            })
+        }
     }
 
-    goToDeck = () => {
-        this.props.navigation.back()
+    validate = (value, messageCaseInError) => {
+        if(!value || (value !== null && value.trim().length === 0)){
+            alert(messageCaseInError)
+            return false;
+        } else {
+            return true;
+        }
     }
 
     render() {
