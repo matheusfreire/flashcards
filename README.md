@@ -2,7 +2,7 @@
 This project is made as part of Udacity React Nanodegree Course. This project is training for react native.
 ## Test
 
-The application was tested on iPhone X and Nexus 6P.
+The application was tested on iPhone X.
 
 ## App Usage
 

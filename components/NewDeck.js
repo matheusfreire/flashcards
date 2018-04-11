@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Platform ,Keyboard} from 'react-native'
 import { TextField } from 'react-native-material-textfield'
 import { StackNavigator, NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -23,6 +23,7 @@ class NewDeck extends React.Component {
         deck: ''
     }
     submit = () => {
+        Keyboard.dismiss()
         const {deck} = this.state
         if(!deck || (deck !== null && deck.trim().length === 0)){
             alert("Please, provide a title for your new deck")

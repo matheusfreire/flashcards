@@ -47,13 +47,6 @@ class NewCard extends React.Component {
             return true;
         }
     }
-    
-    validate = (value, messageInCaseError) => {
-        if(!value || (value !== null && value.trim().length === 0)){
-            alert(messageInCaseError)
-            return;
-        }
-    }    
 
     render() {
         const { navigation, decks } = this.props

@@ -64,7 +64,7 @@ class Quiz extends Component {
 				<Text style={styles.resumeNumQuestions}>
 					{this.state.indexCard + 1}/{quantityOfCards}
 				</Text>
-				
+
 				<FlipComponent
 					containerStyles={{alignItems: 'center'}}
 					isFlipped={this.state.isFlipped}
